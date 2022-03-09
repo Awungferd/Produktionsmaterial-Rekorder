@@ -3,14 +3,14 @@
 der kunde will seine prozesse in der produktion digitalisieren. deshalb wird ein software-tool zur erfassung der verbrauchten materialien in produktion benötigt. dies soll als mobile-fähige web-applikation umgesetzte werden. voraussichtlich wird die app auf mde-geräten mit ca. 5-8 zoll display und auch desktop-geräten zum einsatz kommen. die app soll folgende funktionen beinhalten und anforderungen erfüllen:
 ## maske zur erfassung der daten -> mobile
 
-• auswahlfeld für material (dropdown)
-• erfassung charge (textfeld)
-• erfassung menge (nummernfeld)
-• speichern-button
-◦ zeitstempel
-◦ fortlaufende nummer
-▪ bearbeitbare tabellen-ansicht (grid) der erfassten datensätze und vorgänge ->
-desktop
+## auswahlfeld für material (dropdown)
+• erfassung charge (textfeld) - => Batch entry (text field)
+## erfassung menge (nummernfeld) - => Entry of quantity (number field)
+• speichern-button - => save button
+## zeitstempel - => Timestamp
+◦ fortlaufende nummer - => Consecutive number
+## Bearbeitbare tabellen-ansicht (grid) der erfassten datensätze und vorgänge ->
+desktop - => Editable table view (grid) of the recorded data records and processes
 
 # Requirements:
 The customer wants to digitize their production processes. Therefore, a software tool for recording the materials used in production is required. This is meant to be mobile-enabled
@@ -27,3 +27,8 @@ Mask for recording the data → mobile
 ◦ Consecutive number
 ▪ Editable table view (grid) of the recorded data records and processes →
 desktop
+
+MongoDB database name: evorhei1
+Username: Awung007 Password: HydPXRS53Mk3LJQu
+
+connection string mongodb+srv://Awung007:HydPXRS53Mk3LJQu@ervohei1.1kbyw.mongodb.net/test

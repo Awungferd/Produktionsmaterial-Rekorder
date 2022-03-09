@@ -1,10 +1,13 @@
 
 import './App.css';
+// import UserInterface from './components/UserInterface';
+import LinkToServer from './components/LinkToServer';
 
 function App() {
   return (
-    <div className="App">
-      <h1>We are Soldiering!</h1>
+    <div className="App">    
+      <LinkToServer/>
+      {/* <UserInterface/> */}
     </div>
   );
 }
