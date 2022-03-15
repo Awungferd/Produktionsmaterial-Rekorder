@@ -1,61 +1,19 @@
-import { useState, useEffect } from "react"
-import Axios from "axios"
+
 import { nanoid } from 'nanoid'
-import ReadOnlyTableRows from "./ReadOnlyTable"
-import EditableRows from "./EditableTable"
 import { Table, Button, Row, Col, Form, FloatingLabel } from "react-bootstrap"
-import MobileDisplay from "./MobileDisplay"
 
-export default function LinkToServer() {
-    const [inventoryData, setInventoryData] = useState([])
-    const [material, setMaterial] = useState("")
-    const [chargenNr, setChargenNr] = useState("")
-    const [menge, setMenge] = useState("")
-    const [idBearbeiten, setBearbeiten] = useState(null)
-    const [editEntryById, setEditById] = useState("") // selects an Id to edit entries associated with it   
 
-    useEffect(() => {
-        Axios.get("http://localhost:3005/getEntries").then((response) => {
-            setInventoryData(response.data)
-        })
-    }, [])
+export default function DesktopDisplay(
+    { inventoryData, setInventoryData,
+        material, setMaterial,
+        chargenNr, setChargenNr,
+        menge, setMenge,
+        idBearbeiten, setBearbeiten,
+        editEntryById, setEditById,createNewEntry,modifyEntry }
+) {
 
-    const createNewEntry = (e) => {
-        e.preventDefault()
-        Axios.post("http://localhost:3005/postErschaffen", { material, chargenNr, menge })
-            .then((response) => {
-                alert("Material gespeichert!")
-            })
-            .catch((error) => { alert(error.message) })
-        setMaterial("")
-        setChargenNr("")
-        setMenge("")
-        window.location.reload(true);
-    }
-    //======================
-    function modifyEntry(_id) {
-
-        Axios.patch("http://localhost:3005/bearbeiten", {
-            material,
-            chargenNr,
-            menge,
-            _id: editEntryById
-        })
-            .then((response) => {
-                alert("Data saved!")
-            })
-            .catch((error) => { alert(error.message) })
-        setEditById("")
-        setMaterial("")
-        setChargenNr("")
-        setMenge("")
-        window.location.reload(true);
-    }
-    //==================
     return (<div>
         <h1> Materialbestand</h1>
-
-
         {/* CREATE NEW POST */}
         <div style={{ border: "1px solid tomato", background: "orange" }}>
             <input type="text" placeholder="Artikel name"
