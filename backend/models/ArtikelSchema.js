@@ -1,26 +1,24 @@
 import mongoose from 'mongoose';
 
 const required = true;
-
 const ArtikelSchema = new mongoose.Schema({
     material: {
         type: String,
         required,
         default: "Butter Toast Pouder"
-    },
-    ChargenNr: {
+    }, 
+    chargenNr: {
         type: Number,
         required,
         default: 252634
     },
-    mengen: {
+    menge: {
         type: Number,
         required,
         default: 100
     },
     fortlaufendeNr: {
-        type: Number,
-        required,
+        type: Number,       
         default: 25
     },
     createdAt: {
