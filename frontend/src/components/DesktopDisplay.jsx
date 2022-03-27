@@ -1,14 +1,13 @@
 
 import { nanoid } from 'nanoid'
-import { Table, Button, Row, Col, Form, FloatingLabel } from "react-bootstrap"
+import { Table, Button} from "react-bootstrap"
 
 
 export default function DesktopDisplay(
     { inventoryData, setInventoryData,
         material, setMaterial,
         chargenNr, setChargenNr,
-        menge, setMenge,
-        idBearbeiten, setBearbeiten,
+        menge, setMenge,        
         editEntryById, setEditById,createNewEntry,modifyEntry }
 ) {
 

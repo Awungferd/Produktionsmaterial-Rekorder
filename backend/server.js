@@ -3,6 +3,9 @@ import ArtikelModel from "./models/ArtikelSchema.js"
 import cors from "cors"
 import dotenv from "dotenv"
 import { connectToMongodb } from "./libs/datanbank.js"
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+const path = require('path');
 
 //connect to database
 dotenv.config();
@@ -58,6 +61,14 @@ app.use((req, res) => {
 	res.json({ error: "Resource not found 😥" });
 });
 
+// server production assets
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join("frontend/build")));
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname,"frontend", "build", "index.html"));
+    })
+}
+//=====
 // Launch Server
 app.listen(process.env.PORT, () => {
     console.log("Listening on http://localhost:" + process.env.PORT);
