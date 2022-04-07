@@ -1,4 +1,4 @@
-import { Alert, Card, Button, DropdownButton,Dropdown,Col, InputGroup, FormControl} from "react-bootstrap"
+import { Alert, Card, Button, DropdownButton,Dropdown,Col, InputGroup,Row,Form, FormControl} from "react-bootstrap"
 import { useState} from "react"
 
 export default function MobileDisplay(
@@ -9,14 +9,15 @@ export default function MobileDisplay(
         idBearbeiten, setBearbeiten,
         editEntryById, setEditById }
 ) {
-    const [selectItem, setSelected] = useState("")
-    
+    const [selectItem, setSelected] = useState("") 
+  
     const handleSelect = (e)=>{
         setSelected(e)
     }
+   
     return (
         <div style={{ border: "2px solid blue", height: "auto", width: "480px", margin: "auto" }}>
-            <InputGroup  >
+            <InputGroup>
                 <FormControl aria-label="Text input with dropdown button"
                 placeholder="Artikel Name Schreiben"
                 onChange={(e) => {setMaterial(e.target.value)}}
@@ -29,20 +30,21 @@ export default function MobileDisplay(
                     align="end"
                     onSelect={handleSelect}
                 >
-        {inventoryData ? (inventoryData.map((element, index) => {                               
-                             
-                                
-                                const option = `"LFD-Nr:" ${index}  "Artikel:" ${element.material} "Menge:"${element.menge}, "Chrgen-Nr:" ${element.chargenNr}, "ZeitStempe:" ${element.createdAt}`
-                            
-                                return <Dropdown.Item key={element._id} eventKey={option} > {element.material}</Dropdown.Item>
+        {inventoryData ? (inventoryData.map((element, index) => {  
+        const option = `"LFD-Nr:" ${index}  "Artikel:" ${element.material} "Menge:"${element.menge}, "Chrgen-Nr:" ${element.chargenNr}, "ZeitStempe:" ${element.createdAt}`
+     
+        
+     
+      
+        return <Dropdown.Item key={element._id} eventKey={option} > {element.material}</Dropdown.Item>
                             })) : (null)}
 
                 </DropdownButton>
                 <Alert variant="success">
   <Alert.Heading>Produkt Erfassung</Alert.Heading>
   <hr />
-  <h5 style={{color:"tomato"}}>{selectItem}</h5>
-  
+  <h5 style={{color:"tomato"}}>{selectItem}</h5> 
+
   <hr />
   <Card>
       <Card.Body>
