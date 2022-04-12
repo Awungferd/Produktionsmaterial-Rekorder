@@ -12,6 +12,7 @@ function App(props) {
     const [menge, setMenge] = useState("")
     const [idBearbeiten, setBearbeiten] = useState(null)
     const [editEntryById, setEditById] = useState("")
+   
     // selects an Id to edit entries associated with it
 
     // ================================================================
@@ -37,7 +38,6 @@ function App(props) {
     }
     // ======================
     function modifyEntry(_id) {
-
         Axios.patch("http://localhost:3009/bearbeiten", {material, chargenNr, menge, _id: editEntryById}).then((response) => {
             alert("Data saved!")
         }).catch((error) => {
@@ -50,10 +50,18 @@ function App(props) {
         window.location.reload(true);
     }
     // ==================
-function deleteEntry (_id) {
-    Axios.delete("http://localhost:3009/delete", { data: {material, chargenNr, menge, _id: editEntryById}})
-    
-}
+    const deleteItem = async(_id) =>{
+if (_id){
+    try {
+        const res = await Axios.delete(`http://localhost:3009/entfernen/${_id}`)
+        console.log(res.data.message) 
+    } catch (error) {
+        console.log(error.message)
+    } 
+} else {return alert("Error deleting")}
+window.location.reload(true);
+        
+    }
 
     return (
         <div className="App">
@@ -76,7 +84,7 @@ function deleteEntry (_id) {
           menge={menge}
           createNewEntry={createNewEntry}
           setMenge={setMenge}
-          deleteEntry={deleteEntry}
+          deleteItem={deleteItem}
           />
          
       ) : (
@@ -94,6 +102,7 @@ function deleteEntry (_id) {
           setMenge={setMenge}
           createNewEntry={createNewEntry}
           modifyEntry={modifyEntry}
+          deleteItem={deleteItem}
           />
       )
     }

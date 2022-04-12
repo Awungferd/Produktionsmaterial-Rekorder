@@ -1,14 +1,14 @@
 
 import { nanoid } from 'nanoid'
-import { Table, Button} from "react-bootstrap"
+import { Table, Button } from "react-bootstrap"
 
 
 export default function DesktopDisplay(
     { inventoryData, setInventoryData,
         material, setMaterial,
         chargenNr, setChargenNr,
-        menge, setMenge,        
-        editEntryById, setEditById,createNewEntry,modifyEntry }
+        menge, setMenge,
+        editEntryById, setEditById, createNewEntry, modifyEntry, deleteItem }
 ) {
 
     return (<div>
@@ -65,11 +65,11 @@ export default function DesktopDisplay(
                             </tr>) : (<tr key={"cherios-" + nanoid()} >
                                 <td  >{index + 1}</td>
                                 <td > {element.material}</td>
-                                <td > {element.menge}</td>
+                                <td > {element._id}</td>
                                 <td > {element.chargenNr}</td>
                                 <td  > {element.createdAt} </td>
                                 <td > <Button variant="outline-primary" onClick={() => setEditById(element._id)}>Bearbeiten</Button>
-                                    <Button variant="outline-danger" onClick={() => setEditById(element._id)}>löschen</Button>
+                                    <Button variant="outline-danger" onClick={() => { deleteItem(element._id) }} >X</Button>
                                 </td>
                             </tr>)}
                         </>
