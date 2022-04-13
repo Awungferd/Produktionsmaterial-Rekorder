@@ -65,11 +65,11 @@ export default function DesktopDisplay(
                             </tr>) : (<tr key={"cherios-" + nanoid()} >
                                 <td  >{index + 1}</td>
                                 <td > {element.material}</td>
-                                <td > {element._id}</td>
+                                <td > {element.menge}</td>
                                 <td > {element.chargenNr}</td>
                                 <td  > {element.createdAt} </td>
                                 <td > <Button variant="outline-primary" onClick={() => setEditById(element._id)}>Bearbeiten</Button>
-                                    <Button variant="outline-danger" onClick={() => { deleteItem(element._id) }} >X</Button>
+                                    <Button variant="outline-danger" onClick={() => {deleteItem(element._id) }} >X</Button>
                                 </td>
                             </tr>)}
                         </>

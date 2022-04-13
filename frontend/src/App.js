@@ -1,6 +1,7 @@
 import './App.css';
 import Media from 'react-media'
 import Axios from "axios"
+import {nanoid} from "nanoid"
 import { useState,  useEffect } from "react"
 import DesktopDisplay from './components/DesktopDisplay';
 import MobileDisplay from "./components/MobileDisplay"
@@ -53,8 +54,8 @@ function App(props) {
     const deleteItem = async(_id) =>{
 if (_id){
     try {
-        const res = await Axios.delete(`http://localhost:3009/entfernen/${_id}`)
-        console.log(res.data.message) 
+       const res = await Axios.delete(`http://localhost:3009/entfernung/${_id}`)
+        alert( res.data.message) 
     } catch (error) {
         console.log(error.message)
     } 

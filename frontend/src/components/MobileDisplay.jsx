@@ -22,22 +22,22 @@ export default function MobileDisplay(
                     <>
                         <Table  striped bordered hover size="sm" style={{textAlign: 'justify'}}>
 
-                            <thead style={{fontSize: '12px'}}>
-                                <tr key={"cheese-" + nanoid()}>
-                                    <th>Lfde.Nr.</th>
-                                    <th>Material</th>
-                                    <th>Menge</th>
-                                    <th>chargen-Nr</th>
-                                    <th>Zeitstempel</th>                                    
+                            <thead key={1 + item._id +1} style={{fontSize: '12px'}}>
+                                <tr key={5 + item._id}>
+                                    <th key={item._id +1}>Lfde.Nr.</th>
+                                    <th key={item._id +2}>Material</th>
+                                    <th key={item._id +3}>Menge</th>
+                                    <th key={item._id +4}>chargen-Nr</th>
+                                    <th key={item._id +5}>Zeitstempel</th>                                    
                                 </tr>
                             </thead>
-                            <tbody key={"cheese-" + nanoid()}>
-                                <tr key={"cheese-" + nanoid()}>
-                                    <td>{i+1}</td>
-                                    <td>{item.material}</td>
-                                    <td>{item.menge}</td>
-                                    <td>{item.chargenNr}</td>
-                                    <td>{item.createdAt}</td>                                    
+                            <tbody key={2+ item._id }>
+                                <tr key={2 + item._id +1} >
+                                    <td key={item._id +6} >{i+1}</td>
+                                    <td key={item._id +7}>{item.material}</td>
+                                    <td key={item._id +8}>{item.menge}</td>
+                                    <td key={item._id +9}>{item.chargenNr}</td>
+                                    <td key={item._id +10}>{item.createdAt}</td>                                    
                                 </tr>
                             </tbody>
                         </Table>
@@ -59,7 +59,7 @@ export default function MobileDisplay(
                         onChange={(e) => { setMaterial(e.target.value) }}
                     />
                     <DropdownButton
-                        variant="outline-secondary"
+                        variant="outline-success"
                         title="Auswählen"
                         id="input-group-dropdown-2"
                         placeholder="Produkt Name Erfassen"
@@ -68,23 +68,15 @@ export default function MobileDisplay(
                     >
                         {inventoryData ? (inventoryData.map((element, index) => {
 
-                            const option = `"LFD-Nr:" ${index}  "Artikel:" ${element.material}
-             "Menge:"${element.menge}, "Chargen-Nr:" ${element.chargenNr},
-              "ZeitStempe:" ${element.createdAt}`
-
-                            const option0 = `<table><tr> <td>${index}  </td>  <td>${element.material}</td> 
-             <td>${element.menge}</td> <td> ${element.chargenNr}</td>
-              <td>${element.createdAt}</td> </tr></table> `
-
                             const option2 = element._id
-                            return <Dropdown.Item key={element._id} eventKey={option2} > {element.material}</Dropdown.Item>
+                            return <Dropdown.Item key={index}  eventKey={option2} > {element.material}</Dropdown.Item>
 
                         })) : (null)}
 
                     </DropdownButton>
-                    <DisplaySelection />
+                    <DisplaySelection/>
 
-                    <Card  style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between', background:'beige' }}>
+                    <Card  style={{border:"outset green 2px", width: '100%', flexDirection: 'row', justifyContent: 'space-between', background:'#cfcfbe' }}>
                         <FormControl
                             style={{ width: '40%', marginBottom: "0" }}
                             type="number"
