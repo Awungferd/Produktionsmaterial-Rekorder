@@ -1,71 +1,107 @@
-import { Alert, Card, Button, DropdownButton,Dropdown,Col, InputGroup,Row,Form, FormControl} from "react-bootstrap"
-import { useState} from "react"
+import { useState } from 'react'
+import { nanoid } from 'nanoid'
+import { Alert, Card, Table, Button, DropdownButton, Container, InputGroup, Dropdown, FormControl} from "react-bootstrap"
 
 export default function MobileDisplay(
-    { inventoryData, createNewEntry, setInventoryData,
+    { inventoryData, setInventoryData,
         material, setMaterial,
         chargenNr, setChargenNr,
-        menge, setMenge,
-        idBearbeiten, setBearbeiten,
-        editEntryById, setEditById }
+        menge, setMenge,       
+        editEntryById, setEditById, createNewEntry, modifyEntry, deleteItem }
 ) {
-    const [selectItem, setSelected] = useState("") 
-  
-    const handleSelect = (e)=>{
+    const [SelectItem, setSelected] = useState("")
+    const handleSelect = (e) => {
         setSelected(e)
     }
-   
+  
+    function DisplaySelection() {
+        const SelectedArticle = inventoryData.map((item, i) => {
+            
+            if (item._id === SelectItem) {
+                return (
+                    <>
+                        <Table  striped bordered hover size="sm" style={{textAlign: 'justify'}}>
+
+                            <thead style={{fontSize: '12px'}}>
+                                <tr key={"cheese-" + nanoid()}>
+                                    <th>Lfde.Nr.</th>
+                                    <th>Material</th>
+                                    <th>Menge</th>
+                                    <th>chargen-Nr</th>
+                                    <th>Zeitstempel</th>                                    
+                                </tr>
+                            </thead>
+                            <tbody key={"cheese-" + nanoid()}>
+                                <tr key={"cheese-" + nanoid()}>
+                                    <td>{i+1}</td>
+                                    <td>{item.material}</td>
+                                    <td>{item.menge}</td>
+                                    <td>{item.chargenNr}</td>
+                                    <td>{item.createdAt}</td>                                    
+                                </tr>
+                            </tbody>
+                        </Table>
+                    </>
+                )
+            } 
+        })
+        return (
+            <>{SelectedArticle}</>
+        )
+    }
     return (
-        <div style={{ border: "2px solid blue", height: "auto", width: "480px", margin: "auto" }}>
-            <InputGroup>
-                <FormControl aria-label="Text input with dropdown button"
-                placeholder="Artikel Name Schreiben"
-                onChange={(e) => {setMaterial(e.target.value)}}
-                 />
-                <DropdownButton
-                    variant="outline-secondary"
-                    title="Auswählen"
-                    id="input-group-dropdown-2"
-                    placeholder="Produkt Name Erfassen"
-                    align="end"
-                    onSelect={handleSelect}
-                >
-        {inventoryData ? (inventoryData.map((element, index) => {  
-        const option = `"LFD-Nr:" ${index}  "Artikel:" ${element.material} "Menge:"${element.menge}, "Chrgen-Nr:" ${element.chargenNr}, "ZeitStempe:" ${element.createdAt}`
-     
-        
-     
-      
-        return <Dropdown.Item key={element._id} eventKey={option} > {element.material}</Dropdown.Item>
-                            })) : (null)}
+        <Container fluid style={{ border: '2px solid cyan', background: '#cfcfbe', height: '300px' }}>
+            <Alert.Heading>Produkt Erfassung</Alert.Heading>
+            <>
+                <InputGroup className="mb-3">
+                    <FormControl aria-label="Text input with dropdown button"
+                        placeholder="Artikel Name Schreiben"
+                        onChange={(e) => { setMaterial(e.target.value) }}
+                    />
+                    <DropdownButton
+                        variant="outline-secondary"
+                        title="Auswählen"
+                        id="input-group-dropdown-2"
+                        placeholder="Produkt Name Erfassen"
+                        align="end"
+                        onSelect={handleSelect}
+                    >
+                        {inventoryData ? (inventoryData.map((element, index) => {
 
-                </DropdownButton>
-                <Alert variant="success">
-  <Alert.Heading>Produkt Erfassung</Alert.Heading>
-  <hr />
-  <h5 style={{color:"tomato"}}>{selectItem}</h5> 
+                            const option = `"LFD-Nr:" ${index}  "Artikel:" ${element.material}
+             "Menge:"${element.menge}, "Chargen-Nr:" ${element.chargenNr},
+              "ZeitStempe:" ${element.createdAt}`
 
-  <hr />
-  <Card>
-      <Card.Body>
-  <Col> </Col>
-                    <InputGroup>
+                            const option0 = `<table><tr> <td>${index}  </td>  <td>${element.material}</td> 
+             <td>${element.menge}</td> <td> ${element.chargenNr}</td>
+              <td>${element.createdAt}</td> </tr></table> `
+
+                            const option2 = element._id
+                            return <Dropdown.Item key={element._id} eventKey={option2} > {element.material}</Dropdown.Item>
+
+                        })) : (null)}
+
+                    </DropdownButton>
+                    <DisplaySelection />
+
+                    <Card  style={{ width: '100%', flexDirection: 'row', justifyContent: 'space-between', background:'beige' }}>
                         <FormControl
+                            style={{ width: '40%', marginBottom: "0" }}
                             type="number"
                             placeholder="Chargen-Nr"
-                            onChange={(e) => {setChargenNr(e.target.value)}}
+                            onChange={(e) => { setChargenNr(e.target.value) }}
                         />
                         <FormControl
+                            style={{ width: '30%', alignSelf: 'flex-end' }}
                             type="number"
                             placeholder="Menge"
-                            onChange={(e) => {setMenge(e.target.value)}}
+                            onChange={(e) => { setMenge(e.target.value) }}
                         />
-                    </InputGroup>
-                </Card.Body>
-                <Card.Footer > <Button style={{ marginLeft: "70%" }} onClick={createNewEntry} variant="dark">Speichern</Button></Card.Footer>
-            </Card>
-</Alert>
-</InputGroup>           
-</div>
+                    </Card>                 
+                    <Button style={{ marginLeft: "82%" }} onClick={createNewEntry} variant="dark">Speichern</Button>
+
+                </InputGroup>
+            </>
+        </Container>
     )
 }
