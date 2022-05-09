@@ -51,24 +51,24 @@ export default function DesktopDisplay(
                 {inventoryData.map((element, index) => {
                     return (
                         <>
-                            {editEntryById === element._id ? (<tr >
-                                <td >{index + 1}</td>
-                                <td > <input type="text" required="required" placeholder="Artikel name"
+                            {editEntryById === element._id ? (<tr key={3 + index} >
+                                <td key={3 + index}>{index + 1}</td>
+                                <td key={3 + index}> <input type="text" required="required" placeholder="Artikel name"
                                     onChange={(e) => setMaterial(e.target.value)} value={material} /></td>
-                                <td > <input type="number" required="required" placeholder="Menge einfüllen"
+                                <td key={3 + index}> <input type="number" required="required" placeholder="Menge einfüllen"
                                     onChange={(e) => setMenge(e.target.value)} value={menge} /></td>
-                                <td > <input type="number" required="required" placeholder="ChargenNr einfüllen"
+                                <td key={3 + index}> <input type="number" required="required" placeholder="ChargenNr einfüllen"
                                     onChange={(e) => setChargenNr(e.target.value)} value={chargenNr} /></td>
-                                <td > {element.createdAt} </td>
-                                <td> <Button variant="success" onClick={() => modifyEntry(element._id)}>Speichern</Button></td>
+                                <td key={3 + index} > {element.createdAt} </td>
+                                <td key={3 + index}> <Button variant="success" onClick={() => modifyEntry(element._id)}>Speichern</Button></td>
 
-                            </tr>) : (<tr key={"cherios-" + nanoid()} >
-                                <td  >{index + 1}</td>
-                                <td > {element.material}</td>
-                                <td > {element.menge}</td>
-                                <td > {element.chargenNr}</td>
-                                <td  > {element.createdAt} </td>
-                                <td > <Button variant="outline-primary" onClick={() => setEditById(element._id)}>Bearbeiten</Button>
+                            </tr>) : (<tr key={3 + index} >
+                                <td  key={4 + index}>{index + 1}</td>
+                                <td key={5 + index}> {element.material}</td>
+                                <td key={23 + index}> {element.menge}</td>
+                                <td key={35 + index}> {element.chargenNr}</td>
+                                <td key={13 + index} > {element.createdAt} </td>
+                                <td key={3 + index} > <Button variant="outline-primary" onClick={() => setEditById(element._id)}>Bearbeiten</Button>
                                     <Button variant="outline-danger" onClick={() => {deleteItem(element._id) }} >X</Button>
                                 </td>
                             </tr>)}
